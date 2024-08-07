@@ -1,5 +1,5 @@
 import logging
-import coloredlogs  # Optional, keep if using colored console output
+import coloredlogs
 from datetime import datetime
 
 
@@ -25,9 +25,7 @@ def configure_logging(print_events=0):
         print_events, logging.INFO
     )  # Nível padrão se não encontrado
 
-    filename = f"ERROR_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
-    # adiona o local do arquivo de log
-    filename = f"logs/{filename}"
+    filename = f"logs/ERROR_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.txt"
 
     coloredlogs.install(level=log_level)
 
@@ -39,7 +37,6 @@ def configure_logging(print_events=0):
     logging.basicConfig(
         filename=filename,
         level=log_level,
-        format="%(asctime)s [%(levelname)s] %(message)s",
         datefmt="%Y-%m-%d %H:%M:%S",
         formatter=formatter,
     )
