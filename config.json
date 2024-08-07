@@ -1,8 +1,8 @@
 {
-  "mongo_uri": "",
+  "mongo_uri": "mongodb+srv://lucasdinizhdo:cdYANQYQhvUyrMBD@backpack-database.is7sq.mongodb.net/?retryWrites=true&w=majority&appName=backpack-database",
   "database_name": "backpack-database",
   "collection_name": "listings",
-  "bptf_token": "",
+  "bptf_token": "66b03dfdda79e70b30041a8",
   "websocket_url": "wss://ws.backpack.tf/events",
   "print_events": 3,
   "prioritized_items": ["Mann Co. Supply Crate Key"]
