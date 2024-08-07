@@ -1,6 +1,8 @@
 <h1 align="center" id="project-title">backpack.tf-ws-service</h1>
 
-<img align="center" src="https://socialify.git.ci/LucasHenriqueDiniz/backpack.tf-ws-service/image?font=KoHo&language=1&name=1&owner=1&theme=Light" alt="backpack.tf-ws-service" width="640" height="320" />
+<div align="center">
+<img src="https://socialify.git.ci/LucasHenriqueDiniz/backpack.tf-ws-service/image?font=KoHo&language=1&name=1&owner=1&theme=Light" alt="backpack.tf-ws-service" width="640" height="320" />
+</div>
 
 <p align="center">This is a improved version of the original backpack.tf-ws-service, with the focus on being lightweight in MongoDB (so it can be used in free tier) and with a better code structure and logging.</p>
 

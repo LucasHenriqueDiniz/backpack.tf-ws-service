@@ -15,18 +15,20 @@ class ListingDBManager:
         await self.collection.create_index([("name", 1)], unique=True)
 
     async def insert_listing(
-        self, name: str, intent: str, steamid: str, listing_data: dict
+        self, name: str, appid: str, intent: str, steamid: str, listing_data: dict
     ) -> None:
-        await self.delete_listing(name, intent, steamid)
+        await self.delete_listing(name, appid, intent, steamid)
         update_query = {
             "$push": {"listings": listing_data},
-            "$setOnInsert": {"name": name},
+            "$setOnInsert": {"name": name, "appid": appid},  # columns for item
         }
         await self.collection.update_one({"name": name}, update_query, upsert=True)
 
-    async def delete_listing(self, name: str, intent: str, steamid: str) -> None:
+    async def delete_listing(
+        self, name: str, appid: str, intent: str, steamid: str
+    ) -> None:
         await self.collection.update_one(
-            {"name": name},
+            {"name": name, "appid": appid},
             {"$pull": {"listings": {"steamid": steamid, "intent": intent}}},
         )  # Remove the listing from the document, if it exists
 

@@ -36,29 +36,33 @@ class BptfWebSocket:
         if not payload:
             return dict()
 
+        # event format is the payload in exampleEventWS.json
+
         steamid = payload.get("steamid")
         currencies = payload.get("currencies")
-        buy_out_only = payload.get("buyoutOnly")
 
         if payload.get("bumpedAt"):  # websocket
             # listed_at = payload.get("listedAt")
             bumped_at = payload.get("bumpedAt")
-            trade_offers_preferred = payload.get("tradeOffersPreferred")
+            trade_offers_preferred = payload.get("tradeOffersPreferred", False)
         else:  # snapshots
             # listed_at = payload.get("timestamp")
             bumped_at = payload.get("bump")
             trade_offers_preferred = payload.get("offers")
 
-        intent = True if payload.get("intent") == "sell" else False
+        intent = (
+            True if payload.get("intent") == "sell" else False
+        )  # True = sell, False = buy
         only_buyout = payload.get("buyout", True)
         # user_agent = payload.get("userAgent")
         # details = payload.get('details')
+        # user = payload.get("user")
         item = payload.get("item")
+
         listing = {
             "steamid": steamid,
             "currencies": currencies,
             "trade_offers_preferred": trade_offers_preferred,
-            "buy_out_only": buy_out_only,
             "bumped_at": bumped_at,
             "intent": intent,
             "only_buyout": only_buyout,
@@ -66,7 +70,7 @@ class BptfWebSocket:
             # "user_agent": user_agent,
             # "details": details,
         }
-        return {"item": item, "listing": listing}
+        return {"item": item, "listing": listing}  # , "user": user}
 
     async def update_snapshot(self, item_name: str) -> None:
         snap_request = await self.http_client.get(
@@ -209,16 +213,18 @@ class BptfWebSocket:
     async def handle_event(self, data: dict, event: str) -> None:
         # If no data is provided, exit the function
         if not data:
+            self.logger.debug("No event data provided")
             return
 
         item_name = data.get("item", dict()).get("name")
+        item_appid = data.get("item", dict()).get("appid")
 
         # Depending on the event type, perform different actions
         match event:
             # If the event is a listing update
             case "listing-update":
                 # Process the listing
-                await self.process_listing(data, item_name)
+                await self.process_listing(data, item_name, item_appid)
 
             # If the event is a listing deletion
             case "listing-delete":
@@ -229,6 +235,7 @@ class BptfWebSocket:
 
             # If the event is neither a listing update nor a deletion, exit the function
             case _:
+                logging.error(f"Unknown event type: {event}")
                 return
 
     async def handle_list_events(self, events: list) -> None:
@@ -274,7 +281,7 @@ class BptfWebSocket:
 
         await self.mongodb.update_many(listings_to_update)
 
-    async def process_listing(self, data: dict, item_name: str) -> None:
+    async def process_listing(self, data: dict, item_name: str, appid: str) -> None:
         # Reformat the data
         formated_event = await self.reformat_event(data)
         listing_data = formated_event.get("listing")
@@ -283,6 +290,7 @@ class BptfWebSocket:
         # Insert the listing into the database
         await self.mongodb.insert_listing(
             item_name,
+            appid,
             listing_data.get("intent"),
             listing_data.get("steamid"),
             listing_data,
