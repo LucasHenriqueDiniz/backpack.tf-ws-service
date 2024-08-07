@@ -1,6 +1,6 @@
-# backpack.tf-ws-service
+<h1 align="center" id="project-title">backpack.tf-ws-service</h1>
 
-<img src="https://socialify.git.ci/LucasHenriqueDiniz/backpack.tf-ws-service/image?font=KoHo&language=1&name=1&owner=1&theme=Light" alt="backpack.tf-ws-service" width="640" height="320" />
+<img align="center" src="https://socialify.git.ci/LucasHenriqueDiniz/backpack.tf-ws-service/image?font=KoHo&language=1&name=1&owner=1&theme=Light" alt="backpack.tf-ws-service" width="640" height="320" />
 
 <p align="center">This is a improved version of the original backpack.tf-ws-service, with the focus on being lightweight in MongoDB (so it can be used in free tier) and with a better code structure and logging.</p>
 
@@ -78,11 +78,11 @@ pip install -r requirements.txt
 - **mongo_uri:** MongoDB URI to connect to the database
 - - <strong>Example:</strong> mongodb+srv://<MANGODB_USER>:<MANGODB_USER_PASSWORD>@backpacktf-database.123.mongodb.net/
 - **database_name:** Database name where the data will be stored
-- - <strong>Example:</strong>backpacktf
+- - <strong>Example:</strong> backpacktf
 - **collection_name:** Collection name where the data will be stored
 - - <strong>Example:</strong> listings
 - **bptf_token:** backpack.tf API token
-- - You can get it [here](https://backpack.tf/developer)
+- - You can get it [here](https://backpack.tf/developer/apikey/view)
 - **websocket_url:** backpack.tf websocket url
 - - <strong>Use:</strong> wss://ws.backpack.tf/events
 - **print_events:** logging from the code
