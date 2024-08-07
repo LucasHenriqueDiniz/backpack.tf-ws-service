@@ -65,23 +65,30 @@ pip install -r requirements.txt
 
    ```json
    {
-     "mongo_uri": "YOUR_MONGO_URI", // MongoDB URI
-     "database_name": "YOUR_DATABASE_NAME", // Database name where the data will be stored
-     "collection_name": "YOUR_COLLECTION_NAME", // Collection name where the data will be stored
-     "bptf_token": "YOUR_BPTF_TOKEN", // backpack.tf API token
-     "websocket_url": "wss://ws.backpack.tf/events", // backpack.tf websocket url
-     "print_events": 3, // 0 = no print, 1 = print all, 2 = print only errors, 3 = print only errors and warnings
-     "prioritized_items": ["Mann Co. Supply Crate Key"] // Items that will have their snapshots retrieved more frequently
+     "mongo_uri": "YOUR_MONGO_URI",
+     "database_name": "YOUR_DATABASE_NAME",
+     "collection_name": "YOUR_COLLECTION_NAME",
+     "bptf_token": "YOUR_BPTF_TOKEN",
+     "websocket_url": "wss://ws.backpack.tf/events",
+     "print_events": 3,
+     "prioritized_items": ["Mann Co. Supply Crate Key"]
    }
    ```
 
-   - **mongo_uri:** MongoDB URI | Your MongoDB URI | Example: mongodb+srv://<MANGODB_USER>:<MANGODB_USER_PASSWORD>@backpacktf-database.123.mongodb.net/
-   - **database_name:** Database name where the data will be stored | Example: backpacktf
-   - **collection_name:** Collection name where the data will be stored | Example: listings
-   - **bptf_token:** backpack.tf API token | You can get it [here](https://backpack.tf/developer)
-   - **websocket_url:** backpack.tf websocket url | wss://ws.backpack.tf/events
-   - **print_events:** logging from the code | 0 = critical, 1 = all, 2 = errors, 3 = errors and warnings, 4 = debug
-   - **prioritized_items:** Items that will have their snapshots retrieved more frequently | Example: ["Mann Co. Supply Crate Key"]
+- **mongo_uri:** MongoDB URI to connect to the database
+- - <strong>Example:</strong> mongodb+srv://<MANGODB_USER>:<MANGODB_USER_PASSWORD>@backpacktf-database.123.mongodb.net/
+- **database_name:** Database name where the data will be stored
+- - <strong>Example:</strong>backpacktf
+- **collection_name:** Collection name where the data will be stored
+- - <strong>Example:</strong> listings
+- **bptf_token:** backpack.tf API token
+- - You can get it [here](https://backpack.tf/developer)
+- **websocket_url:** backpack.tf websocket url
+- - <strong>Use:</strong> wss://ws.backpack.tf/events
+- **print_events:** logging from the code
+- - <strong>Example:</strong> 0 = critical, 1 = all, 2 = errors, 3 = errors and warnings, 4 = debug
+- **prioritized_items:** Items that will have their snapshots retrieved more frequently
+- - <strong>Example:</strong> ["Mann Co. Supply Crate Key"]
 
 4. **Run the main.py script (ensure you have a mongodb instance running too):**
 
