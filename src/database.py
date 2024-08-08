@@ -105,7 +105,7 @@ class ListingDBManager:
                         "listings": {
                             "$filter": {
                                 "input": "$listings",
-                                "cond": {"$gte": ["$$this.updated", max_time]},
+                                "cond": {"$gte": ["$$this.bumped_at", max_time]},
                             }
                         }
                     }
